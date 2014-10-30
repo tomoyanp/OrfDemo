@@ -31,7 +31,16 @@ class SwitchSocketServer {
                 in.read(data, 0, is.available());
                 System.out.println("--------------");
 
-                if(counter == 0){
+                String message = String.valueOf(data);
+//                System.out.println(message.substring(17, 34));
+                this.src = message.substring(0, 17);
+                this.dst = message.substring(17, 34);
+                System.out.println("souce mac address");
+                System.out.println(this.src);
+                System.out.println("destnation mac address");
+                System.out.println(this.dst);
+
+/*                if(counter == 0){
                 	this.src = String.valueOf(data);
                 	counter++;
                 }else{
@@ -41,7 +50,8 @@ class SwitchSocketServer {
                 	SwitchPacketCallbackThread sTh = new SwitchPacketCallbackThread();
                 	sTh.run(this.src,this.dst);
                 }
-                System.out.println(data);
+                */
+                //System.out.println(data);
                 System.out.println("--------------");
                 Thread.sleep(intv_time);
              }
