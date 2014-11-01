@@ -1,14 +1,17 @@
 package OrfDemo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 class DemoMain {
     private	static ArrayList<RaspberrySwitch> rpSwitch = new ArrayList<RaspberrySwitch>(1);
     private static DemoUi ui;
     private static RaspberrySwitch rp;
+    private static Random rnd;
 
     public static void main(String args[]){
+        rnd = new Random();
 
         SwitchReadySocketThread rSockTh = new SwitchReadySocketThread();
         rSockTh.start();
@@ -21,36 +24,66 @@ class DemoMain {
 
     }
     
+    public static void controllerConnectCallback(String addr,int x,int y){
+//        System.out.println(addr);
+//        System.out.println(ui.getSwitchX());
+//        System.out.println(ui.getSwitchY());
+        rp = new RaspberrySwitch(addr,x,y);
+        rpSwitch.add(rp);
+    }
+    
     public static void switchConnectCallback(String addr){
+
         ui.setSwitchUi();
         rp = new RaspberrySwitch(addr,ui.getSwitchX(),ui.getSwitchY());
         rpSwitch.add(rp);
     }
     
-    public static void switchPacketCallback(String src,String dst){
+    public static void switchPacketCallback(String addr){
     	int[] srcAxis = new int[2];
     	int[] dstAxis = new int[2];
-    	System.out.println("###########################");
-    	System.out.println(rpSwitch.size());
-    	for(int i = 0; i < rpSwitch.size();i++){
-    		srcAxis = rpSwitch.get(i).switchConnectAPI(src);
-    		if(srcAxis[0] != -1 && srcAxis[1] != -1){
-    			break;
+    	if(addr.equals("192.168.0.1")){
+    		for(int i = 0; i < (rpSwitch.size()-1); i++){
+    			srcAxis = rpSwitch.get(i).switchGetAxis();
+    			dstAxis = rpSwitch.get(i+1).switchGetAxis();
+    			ui.drawTransmittionAxis(srcAxis[0],srcAxis[1],dstAxis[0],dstAxis[1],"0");
+    			try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		}
+    	} else {
+    		for(int i = (rpSwitch.size() - 1); i > 0; i--){
+    			srcAxis = rpSwitch.get(i).switchGetAxis();
+    			dstAxis = rpSwitch.get(i - 1).switchGetAxis();
+    			ui.drawTransmittionAxis(srcAxis[0],srcAxis[1],dstAxis[0],dstAxis[1],"1");
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
     		}
     	}
-    	for(int i = 0; i < rpSwitch.size();i++){
-    		dstAxis = rpSwitch.get(i).switchConnectAPI(dst);
-    		if(dstAxis[0] != -1 && dstAxis[1] != -1){
-    			break;
-    		}
-    	}
-    	System.out.println("###############################");
-    	System.out.println(srcAxis[0]);
-    	System.out.println(srcAxis[1]);
-    	System.out.println(dstAxis[0]);
-    	System.out.println(dstAxis[1]);
-    	ui.drawTransmittionAxis(srcAxis[0],srcAxis[1],dstAxis[0],dstAxis[1]);
-    	ui.clear();
+//    	for(int i = 0; i < rpSwitch.size();i++){
+//    		srcAxis = rpSwitch.get(i).switchConnectAPI(src);
+//    		if(srcAxis[0] != -1 && srcAxis[1] != -1){
+//    			break;
+//    		}
+//    	}
+//    	for(int i = 0; i < rpSwitch.size();i++){
+//    		dstAxis = rpSwitch.get(i).switchConnectAPI(dst);
+//    		if(dstAxis[0] != -1 && dstAxis[1] != -1){
+//    			break;
+//    		}
+//    	}
+//    	ui.drawTransmittionAxis(srcAxis[0],srcAxis[1],dstAxis[0],dstAxis[1],flag);
+//    	int ran = rnd.nextInt(7);
+//    	if(ran == 2){
+    		ui.clear();
+//    	}
     }
 } 
 

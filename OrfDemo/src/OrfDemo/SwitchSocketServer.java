@@ -7,7 +7,7 @@ import java.io.*;
 class SwitchSocketServer {
 	private String src;
 	private String dst;
-
+  	private String flag;
 
     public void setUpSocket() {
     	int port = 9999;
@@ -29,28 +29,16 @@ class SwitchSocketServer {
 
                 char[] data = new char[is.available()];
                 in.read(data, 0, is.available());
-                System.out.println("--------------");
 
                 String message = String.valueOf(data);
 //                System.out.println(message.substring(17, 34));
-                this.src = message.substring(0, 17);
-                this.dst = message.substring(17, 34);
-                System.out.println("souce mac address");
-                System.out.println(this.src);
-                System.out.println("destnation mac address");
-                System.out.println(this.dst);
-
-/*                if(counter == 0){
-                	this.src = String.valueOf(data);
-                	counter++;
-                }else{
-                	this.dst = String.valueOf(data);
-                	counter = 0;
+//                this.src = message.substring(0, 17);
+//                this.dst = message.substring(17, 34);
+//                this.flag = message.substring(34, 35);
                 	//DemoMain.switchPacketCallback(this.src,this.dst);
-                	SwitchPacketCallbackThread sTh = new SwitchPacketCallbackThread();
-                	sTh.run(this.src,this.dst);
-                }
-                */
+              	//SwitchPacketCallbackThread sTh = new SwitchPacketCallbackThread();
+               	//sTh.run(this.src,this.dst);
+                DemoMain.switchPacketCallback(message);
                 //System.out.println(data);
                 System.out.println("--------------");
                 Thread.sleep(intv_time);
@@ -67,8 +55,8 @@ class SwitchSocketServer {
     }
 }
 
-class SwitchPacketCallbackThread extends Thread {
+/*class SwitchPacketCallbackThread extends Thread {
 	public void run(String src,String dst) {
 		DemoMain.switchPacketCallback(src, dst);
 	}
-}
+}*/

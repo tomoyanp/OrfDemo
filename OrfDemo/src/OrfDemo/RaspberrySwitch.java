@@ -18,8 +18,6 @@ public class RaspberrySwitch {
 	public int[] switchConnectAPI(String addr){
 		int[] switchAxis = new int[2];
 		if(this.address.equals(addr)){
-			System.out.println("$$$$$$$$$$$$$$$$$$");
-			System.out.println("true true true");
 			switchAxis[0] = this.switchX;
 			switchAxis[1] = this.switchY;
 		}else{
@@ -29,5 +27,13 @@ public class RaspberrySwitch {
 		
 		return switchAxis;
 
+	}
+	
+	public int[] switchGetAxis(){
+		int[] switchAxis = new int[2];
+		switchAxis[0] = this.switchX;
+		switchAxis[1] = this.switchY;
+		
+		return switchAxis;
 	}
 }

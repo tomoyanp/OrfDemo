@@ -25,6 +25,7 @@ class DemoUi extends JFrame {
     private int srcY;
     private int dstX;
     private int dstY;
+    private String colorFlag = "1";
 
     public DemoUi() {
         createFrame();
@@ -65,35 +66,37 @@ class DemoUi extends JFrame {
     	ImageIcon controller = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/controller.png");
     	JLabel label = new JLabel(controller);
     	contentPanel.add(label);
-    	label.setBounds(1100,300,controller.getIconWidth(),controller.getIconHeight());
+    	this.switchX = 1100;
+    	this.switchY = 300;
+    	label.setBounds(this.switchX,this.switchY,controller.getIconWidth(),controller.getIconHeight());
     	setVisible(true);
+    	DemoMain.controllerConnectCallback("cc:e1:d5:17:80:a0",1100,300);
     }
     
-    public void drawTransmittionAxis(int srcX,int srcY,int dstX,int dstY){
+    public void drawTransmittionAxis(int srcX,int srcY,int dstX,int dstY, String flag){
     	this.srcX = srcX;
     	this.srcY = srcY;
     	this.dstX = dstX;
     	this.dstY = dstY;
+    	this.colorFlag = flag;
     	repaint();
     	setVisible(true);
     }
     
     public void paint(Graphics g) {
-    	super.paint(g);
-    	System.out.println("draw");
+    	//super.paint(g);
     	Graphics2D g2 = (Graphics2D)g;
-    	g2.setColor(Color.BLUE);
+    	if(this.colorFlag.equals("1")){
+    		g2.setColor(Color.BLUE);
+    	}else{
+    		g2.setColor(Color.RED);
+    	}
     	g2.setStroke(new BasicStroke(10));
     	Line2D line = new Line2D.Double(this.srcX + 60,this.srcY + 90,this.dstX + 60,this.dstY + 90);
-    	System.out.println(this.srcX);
-    	System.out.println(this.srcY);
-    	System.out.println(this.dstX);
-    	System.out.println(this.dstY);
     	g2.draw(line);
     }
     
     public void clear(){
-    	System.out.println("aaaaaaaaaaaaaaaaa");
     	Graphics g = getGraphics();
     	//super.paint(g);
     	try {
@@ -109,13 +112,6 @@ class DemoUi extends JFrame {
     	super.paint(g);
     	g2.dispose();
     	g.dispose();
-/*    	this.setControllerUi();
-    	int counterTmp = this.counter;
-    	this.counter = 0;
-    	for(int i = 1; i <= counterTmp; i++){
-    		setSwitchUi();
-    	}
-    	*/
     }
     public int getCounter() {
         return counter;
