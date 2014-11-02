@@ -30,6 +30,7 @@ class DemoUi extends JFrame {
     public DemoUi() {
         createFrame();
         setControllerUi();
+        setClientUi();
     }
 
     public void createFrame(){
@@ -44,7 +45,7 @@ class DemoUi extends JFrame {
     }
 
     public void setSwitchUi(){
-        ImageIcon img = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/smartphone.png");
+        ImageIcon img = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/raspberrypi.png");
         JLabel label = new JLabel(img);
         contentPanel.add(label);
         this.switchX = 0;
@@ -60,6 +61,17 @@ class DemoUi extends JFrame {
         }
         setVisible(true);
         counter++;
+    }
+    
+    public void setClientUi(){
+    	ImageIcon img = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/smartphone.png");
+        JLabel label = new JLabel(img);
+        contentPanel.add(label);
+        this.switchX = 0;
+        this.switchY = 0;
+       	label.setBounds(switchX,switchY,img.getIconWidth(),img.getIconHeight());
+        setVisible(true);
+        DemoMain.controllerConnectCallback("clientnode", 0, 0);
     }
 
     public void setControllerUi(){

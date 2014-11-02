@@ -36,7 +36,7 @@ class DemoMain {
 
         ui.setSwitchUi();
         rp = new RaspberrySwitch(addr,ui.getSwitchX(),ui.getSwitchY());
-        rpSwitch.add(rp);
+        rpSwitch.add((rpSwitch.size()-1),rp);
     }
     
     public static void switchPacketCallback(String addr){
