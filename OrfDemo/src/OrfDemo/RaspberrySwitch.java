@@ -36,4 +36,8 @@ public class RaspberrySwitch {
 		
 		return switchAxis;
 	}
+	
+	public String getAddr(){
+		return this.address;
+	}
 }

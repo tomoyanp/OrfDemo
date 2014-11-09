@@ -18,6 +18,10 @@ class DemoMain {
         
         SwitchPacketSocketThread sSockTh = new SwitchPacketSocketThread();
         sSockTh.start();
+        
+        SwitchDisconnectedSocketThread dSockTh = new SwitchDisconnectedSocketThread();
+        dSockTh.start();
+        
 
         ui = new DemoUi();
 
@@ -37,6 +41,16 @@ class DemoMain {
         ui.setSwitchUi();
         rp = new RaspberrySwitch(addr,ui.getSwitchX(),ui.getSwitchY());
         rpSwitch.add((rpSwitch.size()-1),rp);
+    }
+    
+    public static void disconnectedSwitchCallback(String addr){
+    	System.out.println("call Disconnected Switch Callback method");
+    	for(int i = 0; i < rpSwitch.size(); i++){
+    		if(rpSwitch.get(i).getAddr().equals(addr)){
+    			System.out.println("remove addr = " + addr);
+    			rpSwitch.remove(i);
+    		}
+    	}
     }
     
     public static void switchPacketCallback(String addr){
@@ -102,3 +116,9 @@ class SwitchPacketSocketThread extends Thread {
     }
 }
 
+class SwitchDisconnectedSocketThread extends Thread {
+	public void run() {
+		DisconnectedSocketServer dSockSv = new DisconnectedSocketServer();
+		dSockSv.setUpSocket();
+	}
+}
