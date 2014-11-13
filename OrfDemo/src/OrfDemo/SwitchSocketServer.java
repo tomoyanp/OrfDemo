@@ -5,42 +5,26 @@ import java.io.*;
 
 
 class SwitchSocketServer {
-	private String src;
-	private String dst;
-  	private String flag;
+	private int port = 9999;
+	private int intv_time = 100;
 
     public void setUpSocket() {
-    	int port = 9999;
-    	int intv_time = 100;
         try {
-            System.out.println("Start");
             ServerSocket serverSocket = new ServerSocket(port);
             Socket socket = serverSocket.accept();
-            System.out.println(socket.getInetAddress() + "accept now");
             InputStream is = socket.getInputStream();
             BufferedReader in = new BufferedReader(new InputStreamReader(is));
             
-            int counter = 0;
             while(is.available() >= 0) {
                 if(is.available() == 0){
                     continue;
                 }
 
-
                 char[] data = new char[is.available()];
                 in.read(data, 0, is.available());
 
                 String message = String.valueOf(data);
-//                System.out.println(message.substring(17, 34));
-//                this.src = message.substring(0, 17);
-//                this.dst = message.substring(17, 34);
-//                this.flag = message.substring(34, 35);
-                	//DemoMain.switchPacketCallback(this.src,this.dst);
-              	//SwitchPacketCallbackThread sTh = new SwitchPacketCallbackThread();
-               	//sTh.run(this.src,this.dst);
                 DemoMain.switchPacketCallback(message);
-                //System.out.println(data);
-                System.out.println("--------------");
                 Thread.sleep(intv_time);
              }
 
@@ -55,8 +39,3 @@ class SwitchSocketServer {
     }
 }
 
-/*class SwitchPacketCallbackThread extends Thread {
-	public void run(String src,String dst) {
-		DemoMain.switchPacketCallback(src, dst);
-	}
-}*/

@@ -10,13 +10,13 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 
 
 class DemoUi extends JFrame {
-    private JPanel panel;
     private Container contentPanel;
     private int counter = 1;
     private int switchX;
@@ -26,9 +26,17 @@ class DemoUi extends JFrame {
     private int dstX;
     private int dstY;
     private String colorFlag = "1";
+    private int[] deviceX = new int[5];
+    private int[] deviceY = new int[5];
+    private JLabel[] deviceLabel = new JLabel[5];
+    private JLabel[] textLabel = new JLabel[5];
+	private ImageIcon[] img = new ImageIcon[5];
+	private ImageIcon[] sImg = new ImageIcon[5];
+
 
     public DemoUi() {
         createFrame();
+        setDevice();
         setControllerUi();
         setClientUi();
     }
@@ -44,23 +52,43 @@ class DemoUi extends JFrame {
     	this.clear();
     }
 
-    public void setSwitchUi(){
-        ImageIcon img = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/raspberrypi.png");
-        JLabel label = new JLabel(img);
-        contentPanel.add(label);
-        this.switchX = 0;
-        this.switchY = 0;
-        if(counter % 2 == 0){
-        	this.switchX = 900 - (150*counter);
-        	this.switchY = 50;
-        	label.setBounds(switchX,switchY,img.getIconWidth(),img.getIconHeight());
-        }else{
-        	this.switchX = 900 - (150*counter);
-        	this.switchY = 550;
-        	label.setBounds(switchX,switchY,img.getIconWidth(),img.getIconHeight());
-        }
+    
+    public void setDevice() {
+    	for(int i = 0; i < 5; i++){
+    		img[i] = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/raspberrypi.png");
+    		deviceLabel[i] = new JLabel(img[i]);
+    		sImg[i] = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/switch.png");
+    	}
+    	for(int i = 0; i < 5; i++){
+    		textLabel[i] = new JLabel(String.valueOf(i+1));
+    		textLabel[i].setFont(new Font("Serif", Font.PLAIN, 50));
+    		contentPanel.add(deviceLabel[i]);
+    		contentPanel.add(textLabel[i]);
+    		if(i % 2 == 0){
+    			deviceX[i] = 900 - (150*i);
+    			deviceY[i] = 50;
+    			deviceLabel[i].setBounds(deviceX[i],deviceY[i],img[i].getIconWidth(),img[i].getIconHeight());
+    			textLabel[i].setBounds(deviceX[i],deviceY[i]-40,50,50);
+    		} else {
+    			deviceX[i] = 900 - (150*i);
+    			deviceY[i] = 550;
+    			deviceLabel[i].setBounds(deviceX[i],deviceY[i],img[i].getIconWidth(),img[i].getIconHeight());   			
+    			textLabel[i].setBounds(deviceX[i],deviceY[i]-10,50,50);
+    		}
+    		System.out.println(deviceX[i] + "aaaaaa" + deviceY[i]);
+    	}
         setVisible(true);
-        counter++;
+    }
+    public void setSwitchUi(int flag){
+    	deviceLabel[flag].setIcon(sImg[flag]);
+       	deviceLabel[flag].setBounds(deviceX[flag],deviceY[flag],sImg[flag].getIconWidth(),sImg[flag].getIconHeight());
+        setVisible(true);
+    }
+    
+    public void removeSwitch(int flag) {
+    	deviceLabel[flag].setIcon(img[flag]);
+    	deviceLabel[flag].setBounds(deviceX[flag], deviceY[flag], img[flag].getIconWidth(), img[flag].getIconHeight());
+    	setVisible(true);
     }
     
     public void setClientUi(){
@@ -125,15 +153,13 @@ class DemoUi extends JFrame {
     	g2.dispose();
     	g.dispose();
     }
-    public int getCounter() {
-        return counter;
-    }
-    public int getSwitchX(){
-    	return this.switchX;
+
+    public int getSwitchX(int flag){
+    	return this.deviceX[flag];
     }
     
-    public int getSwitchY() {
-    	return this.switchY;
+    public int getSwitchY(int flag) {
+    	return this.deviceY[flag];
     }
 }
         

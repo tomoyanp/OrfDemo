@@ -5,11 +5,11 @@ import java.io.*;
 
 
 class ReadySocketServer {
+	private int port = 8888;
+	private int intv_time = 100;
 
 
     public void setUpSocket() {
-    	int port = 8888;
-    	int intv_time = 100;
         try {
             System.out.println("Start");
            	ServerSocket serverSocket = new ServerSocket(port);
@@ -29,11 +29,14 @@ class ReadySocketServer {
                 in.read(data, 0, is.available());
                 String addr = String.valueOf(data);
                 DemoMain.switchConnectCallback(addr);
-   //             Thread.sleep(intv_time);
+                Thread.sleep(intv_time);
              }
 
          } catch (IOException e) {
              e.printStackTrace();
-         }
+         } catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

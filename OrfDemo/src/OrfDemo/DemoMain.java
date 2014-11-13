@@ -22,24 +22,31 @@ class DemoMain {
         SwitchDisconnectedSocketThread dSockTh = new SwitchDisconnectedSocketThread();
         dSockTh.start();
         
-
         ui = new DemoUi();
-
 
     }
     
     public static void controllerConnectCallback(String addr,int x,int y){
-//        System.out.println(addr);
-//        System.out.println(ui.getSwitchX());
-//        System.out.println(ui.getSwitchY());
-        rp = new RaspberrySwitch(addr,x,y);
+        rp = new RaspberrySwitch(addr,x,y,-1);
         rpSwitch.add(rp);
     }
     
     public static void switchConnectCallback(String addr){
 
-        ui.setSwitchUi();
-        rp = new RaspberrySwitch(addr,ui.getSwitchX(),ui.getSwitchY());
+    	int flag = 0;
+    	if (addr.equals("aaa")){
+    		flag = 0;
+    	} else if(addr.equals("bbb")) {
+    		flag = 1;
+    	} else if(addr.equals("ccc")) {
+    		flag = 2;
+    	} else if(addr.equals("ddd")) {
+    		flag = 3;
+    	} else if(addr.equals("eee")) {
+    		flag = 4;
+    	}
+        ui.setSwitchUi(flag);
+        rp = new RaspberrySwitch(addr,ui.getSwitchX(flag),ui.getSwitchY(flag),flag);
         rpSwitch.add((rpSwitch.size()-1),rp);
     }
     
@@ -48,6 +55,7 @@ class DemoMain {
     	for(int i = 0; i < rpSwitch.size(); i++){
     		if(rpSwitch.get(i).getAddr().equals(addr)){
     			System.out.println("remove addr = " + addr);
+    			ui.removeSwitch(rpSwitch.get(i).getFlag());
     			rpSwitch.remove(i);
     		}
     	}
@@ -81,26 +89,8 @@ class DemoMain {
 					}
     		}
     	}
-//    	for(int i = 0; i < rpSwitch.size();i++){
-//    		srcAxis = rpSwitch.get(i).switchConnectAPI(src);
-//    		if(srcAxis[0] != -1 && srcAxis[1] != -1){
-//    			break;
-//    		}
-//    	}
-//    	for(int i = 0; i < rpSwitch.size();i++){
-//    		dstAxis = rpSwitch.get(i).switchConnectAPI(dst);
-//    		if(dstAxis[0] != -1 && dstAxis[1] != -1){
-//    			break;
-//    		}
-//    	}
-//    	ui.drawTransmittionAxis(srcAxis[0],srcAxis[1],dstAxis[0],dstAxis[1],flag);
-//    	int ran = rnd.nextInt(7);
-//    	if(ran == 2){
-    		ui.clear();
-//    	}
     }
 } 
-
 
 class SwitchReadySocketThread extends Thread {
     public void run() {

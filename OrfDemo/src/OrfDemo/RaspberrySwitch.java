@@ -4,14 +4,13 @@ public class RaspberrySwitch {
 	private String address;
 	private int switchX;
 	private int switchY;
+	private int flag;
 	
-	RaspberrySwitch(String addr,int x,int y){
+	RaspberrySwitch(String addr,int x,int y,int flag){
 		this.address = addr;
 		this.switchX = x;
 		this.switchY = y;
-		System.out.println(this.address);
-		System.out.println(this.switchX);
-		System.out.println(this.switchY);
+		this.flag = flag;
 	}
 
 	
@@ -39,5 +38,9 @@ public class RaspberrySwitch {
 	
 	public String getAddr(){
 		return this.address;
+	}
+	
+	public int getFlag(){
+		return this.flag;
 	}
 }
