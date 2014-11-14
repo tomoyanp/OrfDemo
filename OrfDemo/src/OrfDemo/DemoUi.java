@@ -26,12 +26,13 @@ class DemoUi extends JFrame {
     private int dstX;
     private int dstY;
     private String colorFlag = "1";
-    private int[] deviceX = new int[5];
-    private int[] deviceY = new int[5];
-    private JLabel[] deviceLabel = new JLabel[5];
-    private JLabel[] textLabel = new JLabel[5];
-	private ImageIcon[] img = new ImageIcon[5];
-	private ImageIcon[] sImg = new ImageIcon[5];
+    private int device_num = 4;
+    private int[] deviceX = new int[device_num];
+    private int[] deviceY = new int[device_num];
+    private JLabel[] deviceLabel = new JLabel[device_num];
+    private JLabel[] textLabel = new JLabel[device_num];
+    private ImageIcon[] img = new ImageIcon[device_num];
+    private ImageIcon[] sImg = new ImageIcon[device_num];
 
 
     public DemoUi() {
@@ -59,7 +60,7 @@ class DemoUi extends JFrame {
     		deviceLabel[i] = new JLabel(img[i]);
     		sImg[i] = new ImageIcon("/home/tomoyan/OrfDemo/OrfDemo/src/OrfDemo/switch.png");
     	}
-    	for(int i = 0; i < 5; i++){
+    	for(int i = 0; i < this.device_num; i++){
     		textLabel[i] = new JLabel(String.valueOf(i+1));
     		textLabel[i].setFont(new Font("Serif", Font.PLAIN, 50));
     		contentPanel.add(deviceLabel[i]);
@@ -75,7 +76,6 @@ class DemoUi extends JFrame {
     			deviceLabel[i].setBounds(deviceX[i],deviceY[i],img[i].getIconWidth(),img[i].getIconHeight());   			
     			textLabel[i].setBounds(deviceX[i],deviceY[i]-10,50,50);
     		}
-    		System.out.println(deviceX[i] + "aaaaaa" + deviceY[i]);
     	}
         setVisible(true);
     }
