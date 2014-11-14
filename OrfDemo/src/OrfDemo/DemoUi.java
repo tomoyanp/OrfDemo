@@ -55,9 +55,9 @@ class DemoUi extends JFrame {
     
     public void setDevice() {
     	for(int i = 0; i < 5; i++){
-    		img[i] = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/raspberrypi.png");
+    		img[i] = new ImageIcon("/home/tomoyan/OrfDemo/OrfDemo/src/OrfDemo/raspberrypi.png");
     		deviceLabel[i] = new JLabel(img[i]);
-    		sImg[i] = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/switch.png");
+    		sImg[i] = new ImageIcon("/home/tomoyan/OrfDemo/OrfDemo/src/OrfDemo/switch.png");
     	}
     	for(int i = 0; i < 5; i++){
     		textLabel[i] = new JLabel(String.valueOf(i+1));
@@ -92,7 +92,7 @@ class DemoUi extends JFrame {
     }
     
     public void setClientUi(){
-    	ImageIcon img = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/smartphone.png");
+    	ImageIcon img = new ImageIcon("/home/tomoyan/OrfDemo/OrfDemo/src/OrfDemo/smartphone.png");
         JLabel label = new JLabel(img);
         contentPanel.add(label);
         this.switchX = 0;
@@ -103,7 +103,7 @@ class DemoUi extends JFrame {
     }
 
     public void setControllerUi(){
-    	ImageIcon controller = new ImageIcon("/Users/tomop/java/OrfDemo/src/OrfDemo/controller.png");
+    	ImageIcon controller = new ImageIcon("/home/tomoyan/OrfDemo/OrfDemo/src/OrfDemo/controller.png");
     	JLabel label = new JLabel(controller);
     	contentPanel.add(label);
     	this.switchX = 1100;

@@ -34,7 +34,7 @@ class DemoMain {
     public static void switchConnectCallback(String addr){
 
     	int flag = 0;
-    	if (addr.equals("aaa")){
+    	if (addr.equals("2a:8b:0d:d1:f4:44")){
     		flag = 0;
     	} else if(addr.equals("bbb")) {
     		flag = 1;
@@ -64,7 +64,7 @@ class DemoMain {
     public static void switchPacketCallback(String addr){
     	int[] srcAxis = new int[2];
     	int[] dstAxis = new int[2];
-    	if(addr.equals("192.168.0.1")){
+    	if(addr.equals("192.168.0.7")){
     		for(int i = 0; i < (rpSwitch.size()-1); i++){
     			srcAxis = rpSwitch.get(i).switchGetAxis();
     			dstAxis = rpSwitch.get(i+1).switchGetAxis();
