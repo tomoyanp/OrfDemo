@@ -66,12 +66,12 @@ class DemoUi extends JFrame {
     		contentPanel.add(deviceLabel[i]);
     		contentPanel.add(textLabel[i]);
     		if(i % 2 == 0){
-    			deviceX[i] = 900 - (150*i);
+    			deviceX[i] = 900 - (200*i);
     			deviceY[i] = 50;
     			deviceLabel[i].setBounds(deviceX[i],deviceY[i],img[i].getIconWidth(),img[i].getIconHeight());
     			textLabel[i].setBounds(deviceX[i],deviceY[i]-40,50,50);
     		} else {
-    			deviceX[i] = 900 - (150*i);
+    			deviceX[i] = 900 - (200*i);
     			deviceY[i] = 550;
     			deviceLabel[i].setBounds(deviceX[i],deviceY[i],img[i].getIconWidth(),img[i].getIconHeight());   			
     			textLabel[i].setBounds(deviceX[i],deviceY[i]-10,50,50);
