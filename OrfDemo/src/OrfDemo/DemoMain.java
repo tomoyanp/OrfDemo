@@ -45,7 +45,12 @@ class DemoMain {
     	}
         ui.setSwitchUi(flag);
         rp = new RaspberrySwitch(addr,ui.getSwitchX(flag),ui.getSwitchY(flag),flag);
-        rpSwitch.add((rpSwitch.size()-1),rp);
+        for(int i = 0; i < rpSwitch.size(); i++){
+        	if ( rpSwitch.get(i).getFlag() > flag){
+        		//rpSwitch.add((rpSwitch.size()-1),rp);
+        		rpSwitch.add(i,rp);
+        	}
+        }
     }
     
     public static void disconnectedSwitchCallback(String addr){
