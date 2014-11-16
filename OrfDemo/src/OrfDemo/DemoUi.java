@@ -55,7 +55,7 @@ class DemoUi extends JFrame {
 
     
     public void setDevice() {
-    	for(int i = 0; i < 5; i++){
+    	for(int i = 0; i < device_num; i++){
     		img[i] = new ImageIcon("/home/tomoyan/OrfDemo/OrfDemo/src/OrfDemo/raspberrypi.png");
     		deviceLabel[i] = new JLabel(img[i]);
     		sImg[i] = new ImageIcon("/home/tomoyan/OrfDemo/OrfDemo/src/OrfDemo/switch.png");
@@ -80,12 +80,14 @@ class DemoUi extends JFrame {
         setVisible(true);
     }
     public void setSwitchUi(int flag){
+        System.out.println("switch connected");
     	deviceLabel[flag].setIcon(sImg[flag]);
        	deviceLabel[flag].setBounds(deviceX[flag],deviceY[flag],sImg[flag].getIconWidth(),sImg[flag].getIconHeight());
         setVisible(true);
     }
     
     public void removeSwitch(int flag) {
+        System.out.println("flag == " + flag);
     	deviceLabel[flag].setIcon(img[flag]);
     	deviceLabel[flag].setBounds(deviceX[flag], deviceY[flag], img[flag].getIconWidth(), img[flag].getIconHeight());
     	setVisible(true);

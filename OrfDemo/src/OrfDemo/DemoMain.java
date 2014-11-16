@@ -34,16 +34,14 @@ class DemoMain {
     public static void switchConnectCallback(String addr){
 
     	int flag = 0;
-    	if (addr.equals("2a:8b:0d:d1:f4:44")){
+    	if (addr.equals("cc:e1:d5:17:88:6d")){
     		flag = 0;
-    	} else if(addr.equals("bbb")) {
+    	} else if(addr.equals("cc:e1:d5:17:80:a0")) {
     		flag = 1;
-    	} else if(addr.equals("ccc")) {
+    	} else if(addr.equals("cc:e1:d5:17:f2:cd")) {
     		flag = 2;
-    	} else if(addr.equals("ddd")) {
+    	} else if(addr.equals("cc:e1:d5:17:d2:e7")) {
     		flag = 3;
-    	} else if(addr.equals("eee")) {
-    		flag = 4;
     	}
         ui.setSwitchUi(flag);
         rp = new RaspberrySwitch(addr,ui.getSwitchX(flag),ui.getSwitchY(flag),flag);
@@ -52,6 +50,7 @@ class DemoMain {
     
     public static void disconnectedSwitchCallback(String addr){
     	System.out.println("call Disconnected Switch Callback method");
+        System.out.println(addr);
     	for(int i = 0; i < rpSwitch.size(); i++){
     		if(rpSwitch.get(i).getAddr().equals(addr)){
     			System.out.println("remove addr = " + addr);
@@ -89,6 +88,8 @@ class DemoMain {
 					}
     		}
     	}
+
+        ui.clear();
     }
 } 
 

@@ -12,30 +12,33 @@ import java.io.*;
 
 
 public class DisconnectedSocketServer {
-    private int port = 7777;
-   	private int intv_time = 100;
+    private int port = 11111;
+    private int intv_time = 100;
 
     public void setUpSocket() {
     	while(true){
         try {
-            ServerSocket serverSocket = new ServerSocket(port);
+            ServerSocket serverSocket = new ServerSocket();
+            serverSocket.bind(new InetSocketAddress("192.168.0.1",port));
             Socket socket = serverSocket.accept();
             InputStream is = socket.getInputStream();
             BufferedReader in = new BufferedReader(new InputStreamReader(is));
             
-//            while(is.available() >= 0) {
-//                if(is.available() == 0){
-//                    continue;
-//                }
+            while(is.available() >= 0) {
+                if(is.available() == 0){
+                    continue;
+                }
 
                 char[] data = new char[is.available()];
                 in.read(data, 0, is.available());
 
-                System.out.println("aaaaaaaaaaaaaaa");
+                System.out.println(data);
                 String message = String.valueOf(data);
+                System.out.println(message);
                 DemoMain.disconnectedSwitchCallback(message);
                 Thread.sleep(intv_time);
- //            }
+                break;
+            }
 
              in.close();
              socket.close();
