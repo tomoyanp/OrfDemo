@@ -46,7 +46,7 @@ class DemoMain {
         ui.setSwitchUi(flag);
         rp = new RaspberrySwitch(addr,ui.getSwitchX(flag),ui.getSwitchY(flag),flag);
         for(int i = 0; i < rpSwitch.size(); i++){
-        	if ( rpSwitch.get(i).getFlag() > flag){
+        	if ( rpSwitch.get(i).getFlag() > flag || i == (rpSwitch.size()-1)){
         		//rpSwitch.add((rpSwitch.size()-1),rp);
         		rpSwitch.add(i,rp);
         	}
